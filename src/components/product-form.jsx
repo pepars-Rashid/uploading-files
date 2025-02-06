@@ -60,7 +60,8 @@ export default function ProductForm() {
         file,
         onProgressChange: (progress) => setUploadProgress(progress),
       });
-
+      
+      setUploadProgress(0)
       // Create PSTU object from EdgeStore response
       const pstu = {
         path: res.url,
@@ -97,7 +98,7 @@ export default function ProductForm() {
             value={file}
             onChange={(file) => setFile(file)}
           />
-          {(uploadProgress > 0 && isUploading) &&(
+          {(uploadProgress > 0) &&(
             <div className="h-2 w-full bg-gray-200 rounded-full">
               <div 
                 className="h-full bg-blue-600 rounded-full transition-all" 

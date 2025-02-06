@@ -5,6 +5,8 @@ import { db } from '@/database/db';
 import { Product, ProductVariant } from '@/database/schema';
 import { eq } from 'drizzle-orm';
 
+export const dynamic = 'force-dynamic'
+
 export default async function Page() {
   // Fetch products with their variants using LEFT JOIN
   const result = await db
