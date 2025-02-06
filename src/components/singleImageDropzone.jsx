@@ -32,7 +32,7 @@ const ERROR_MESSAGES = {
   },
 };
 
-const SingleImageDropzone = React.forwardRef(
+export const SingleImageDropzone = React.forwardRef(
   (
     { dropzoneOptions, width, height, value, className, disabled, onChange },
     ref,
@@ -190,5 +190,3 @@ const Button = React.forwardRef(({ className, ...props }, ref) => {
   );
 });
 Button.displayName = 'Button';
-
-export { SingleImageDropzone };
