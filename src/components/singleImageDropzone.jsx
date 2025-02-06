@@ -170,7 +170,6 @@ export const SingleImageDropzone = React.forwardRef(
     );
   },
 );
-SingleImageDropzone.displayName = 'SingleImageDropzone';
 
 const Button = React.forwardRef(({ className, ...props }, ref) => {
   return (
@@ -189,4 +188,3 @@ const Button = React.forwardRef(({ className, ...props }, ref) => {
     />
   );
 });
-Button.displayName = 'Button';
