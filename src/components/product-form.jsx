@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { SingleImageDropzone } from '@/components/SingleImageDropzone';
+import { SingleImageDropzone } from './singleImageDropzone';
 import { useEdgeStore } from '@/lib/edgestore';
 import { useState } from 'react';
 import { toast } from '@/hooks/use-toast';
