@@ -26,7 +26,7 @@ export async function createProduct(data){
       })
     ));
 
-    revalidatePath('/testing', )
+    revalidatePath('/testing')
   } catch (error) {
     console.error('Error creating product:', error);
     return { success: false };
