@@ -58,7 +58,6 @@ export const SingleImageDropzone = React.forwardRef(
       isDragAccept,
       isDragReject,
     } = useDropzone({
-      accept: { '*': [] },
       multiple: false,
       disabled,
       onDrop: (acceptedFiles) => {
