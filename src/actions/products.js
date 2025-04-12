@@ -26,7 +26,7 @@ export async function createProduct(data){
       })
     ));
 
-    revalidatePath('/testing')
+    revalidatePath('/testing-images-store')
   } catch (error) {
     console.error('Error creating product:', error);
     return { success: false };
@@ -35,6 +35,7 @@ export async function createProduct(data){
 
 // Update to handle video creation
 export async function createVideo(videoData) {
+  try{
   // Insert into Video table instead of Product
   await db.insert(Video).values({
     name: videoData.name,
@@ -42,4 +43,9 @@ export async function createVideo(videoData) {
     category: videoData.category,
     pstu: videoData.pstu
   });
+  revalidatePath('/testing-videos')
+  } catch (error) {
+    console.error('Error creating Video:', error);
+    return { success: false };
+  }
 }
