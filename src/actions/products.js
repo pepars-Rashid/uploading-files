@@ -32,3 +32,14 @@ export async function createProduct(data){
     return { success: false };
   }
 }
+
+// Update to handle video creation
+export async function createVideo(videoData) {
+  // Insert into Video table instead of Product
+  await db.insert(Video).values({
+    name: videoData.name,
+    description: videoData.description,
+    category: videoData.category,
+    pstu: videoData.pstu
+  });
+}

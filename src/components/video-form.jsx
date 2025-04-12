@@ -1,4 +1,4 @@
-// src/components/product-form.jsx 
+// src/components/video-form.jsx 
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,25 +8,19 @@ import { Button } from './ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-import { SingleImageDropzone } from './singleImageDropzone';
+import { SingleVideoDropzone } from './singleVideoDropzone';
 import { useEdgeStore } from '@/lib/edgestore';
 import { useState } from 'react';
 import { toast } from '@/hooks/use-toast';
-import { createProduct } from '@/actions/products';
+import { createVideo } from '@/actions/products';
 
 const formSchema = z.object({
-  name: z.string().min(2),
-  description: z.string().min(10),
-  price: z.coerce.number().positive(),
-  category: z.string().min(2),
-  variants: z.array(z.object({
-    name: z.string().min(1),
-    quantity: z.coerce.number().nonnegative(),
-    sku: z.string().optional(),
-  }))
-});
+    name: z.string().min(2),
+    description: z.string().min(10),
+    category: z.string().min(2),
+  });
 
-export default function ProductForm() {
+export default function VideoForm() {
   const [file, setFile] = useState();
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
@@ -37,13 +31,7 @@ export default function ProductForm() {
     defaultValues: {
       name: '',
       description: '',
-      price: 0,
       category: '',
-      variants: [{
-        name: '',
-        quantity: 0,
-        sku: ''
-      }]
     },
   });
 
@@ -72,7 +60,7 @@ export default function ProductForm() {
       };
 
       // Call server action with form values and PSTU
-      await createProduct({
+      await createVideo({
         ...values,
         pstu,
       });
@@ -93,7 +81,7 @@ export default function ProductForm() {
         {/* Product Image Upload */}
         <div className="space-y-4">
           <FormLabel>Product Image</FormLabel>
-          <SingleImageDropzone
+          <SingleVideoDropzone
             width={400}
             height={400}
             value={file}
@@ -140,20 +128,6 @@ export default function ProductForm() {
 
         <FormField
           control={form.control}
-          name="price"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Price</FormLabel>
-              <FormControl>
-                <Input type="number" placeholder="Price" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
           name="category"
           render={({ field }) => (
             <FormItem>
@@ -167,69 +141,6 @@ export default function ProductForm() {
         />
 
         {/* Variants */}
-        <div className="space-y-4">
-          {form.watch('variants').map((_, index) => (
-            <div key={index} className="space-y-4 border p-4 rounded">
-              <FormField
-                control={form.control}
-                name={`variants.${index}.name`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Variant Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Variant Name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name={`variants.${index}.quantity`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Quantity</FormLabel>
-                    <FormControl>
-                      <Input type="number" placeholder="Quantity" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name={`variants.${index}.sku`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>SKU (optional)</FormLabel>
-                    <FormControl>
-                      <Input placeholder="SKU" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <Button
-                type="button"
-                variant="destructive"
-                onClick={() => form.setValue('variants', form.getValues('variants').filter((_, i) => i !== index))}
-              >
-                Remove Variant
-              </Button>
-            </div>
-          ))}
-
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => form.setValue('variants', [...form.getValues('variants'), { name: '', quantity: 0, sku: '' }])}
-          >
-            Add Variant
-          </Button>
-        </div>
 
         <Button type="submit" disabled={isUploading}>
           {isUploading ? 'Creating Product...' : 'Create Product'}

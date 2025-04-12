@@ -1,4 +1,4 @@
-// src/components/singleImageDropzone.jsx 
+// src/components/singleVideoDropzone.jsx 
 'use client';
 
 import { formatFileSize } from '@edgestore/react/utils';
@@ -33,7 +33,7 @@ const ERROR_MESSAGES = {
   },
 };
 
-export const SingleImageDropzone = React.forwardRef(
+export const SingleVideoDropzone = React.forwardRef(
   (
     { dropzoneOptions, width, height, value, className, disabled, onChange },
     ref,
@@ -126,11 +126,9 @@ export const SingleImageDropzone = React.forwardRef(
 
           {imageUrl ? (
             // Image Preview
-            <img
-              className="h-full w-full rounded-md object-cover"
-              src={imageUrl}
-              alt={acceptedFiles[0]?.name}
-            />
+            <video className="h-full w-full rounded-md object-cover" controls>
+                <source src={imageUrl} type="video/mp4" />
+            </video>
           ) : (
             // Upload Icon
             <div className="flex flex-col items-center justify-center text-xs">

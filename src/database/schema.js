@@ -32,3 +32,13 @@ export const ProductVariant = pgTable('product_variant', {
     createdAt: timestamp('createdAt').defaultNow(),
     updatedAt: timestamp('updatedAt').defaultNow().$onUpdate(() => new Date()),
 });
+
+export const Video = pgTable('video', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  description: text('description').notNull(),
+  pstu: jsonb('pstu'),
+  category: text('category').notNull(),
+  createdAt: timestamp('createdAt').defaultNow(),
+  updatedAt: timestamp('updatedAt').defaultNow().$onUpdate(() => new Date()),
+});
