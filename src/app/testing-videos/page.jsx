@@ -30,9 +30,10 @@ export default async function Page() {
                   <video
                     controls
                     width="100%"
-                    src={video.pstu.path}
                     className="object-cover rounded-lg"
-                  />
+                  >
+                    <source src={video.pstu.path} type="video/mp4"/>
+                  </video>
                 </div>
               )}
               <CardTitle>{video.name}</CardTitle>
