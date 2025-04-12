@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/database/db'; 
-import { Product, ProductVariant } from '@/database/schema';
+import { Product, ProductVariant, Video } from '@/database/schema';
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
